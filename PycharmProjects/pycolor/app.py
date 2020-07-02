@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # coding: utf-8
 # Author: Laurent Jégou <jegou@univ-tlse2.fr>
 # With code from:
@@ -41,7 +42,7 @@ def ajax_index():
 # Main analysis route
 @app.route('/analysis', methods=['POST'])
 def analyse_couleurs():
-    import StringIO
+    import io
     import urllib
     from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
@@ -54,7 +55,7 @@ def analyse_couleurs():
     ct = float(request.form['sizecoef'])
     srcimage = request.form['srcimage']
     if (srcimage[:4] == "http"):
-        srcimage = StringIO.StringIO(urllib.urlopen(srcimage).read())
+        srcimage = io.StringIO.StringIO(urllib.urlopen(srcimage).read())
 
     # Opens image to an array of RGB colors
     img = Image.open(srcimage)
@@ -124,7 +125,7 @@ def analyse_couleurs():
     # Figure to PNG export
     progress = 70
     canvas = FigureCanvas(fig)
-    png_output = StringIO.StringIO()
+    png_output = io.StringIO.StringIO()
     canvas.print_png(png_output)
     progress = 80
     data = png_output.getvalue().encode('base64')
