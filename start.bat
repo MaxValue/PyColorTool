@@ -1,4 +1,4 @@
 @echo off
 
 venv/bin/activate.bat
-python3 PyColorTool/PycharmProjects/pycolor/app.py
+python3 PycharmProjects/pycolor/app.py
